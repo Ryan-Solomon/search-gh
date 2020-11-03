@@ -6,15 +6,15 @@ import axios from 'axios';
 
 const rootUrl = 'https://api.github.com';
 
-export const GithubContext = React.createContext();
+const GithubContext = React.createContext();
 
-export const GithubProvider = ({ children }) => {
+const GithubProvider = ({ children }) => {
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
   const [followers, setFollowers] = useState(mockFollowers);
 
   return (
-    <GithubContext
+    <GithubContext.Provider
       value={{
         githubUser,
         repos,
@@ -22,10 +22,12 @@ export const GithubProvider = ({ children }) => {
       }}
     >
       {children}
-    </GithubContext>
+    </GithubContext.Provider>
   );
 };
 
 // export const useGithubContext = () => {
 //   return React.useContext(GithubContext);
 // };
+
+export { GithubProvider, GithubContext };
